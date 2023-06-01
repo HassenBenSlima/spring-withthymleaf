@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/header :: header"/>
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <div th:replace="fragments/sidebar :: sidebar"/>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="fragments/navbar :: navbar"/>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <h3 align="center"> Update Product</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-md-8">
+                            <form action="#" th:action="@{/produit/edit}" th:object="${produit}" method="post"
+                                  enctype="multipart/form-data">
+                                <div class="row">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <div class="form-group col-md-6">
+                                        <label for="label" class="col-form-label">Label</label> <input type="text"
+                                                                                                       th:field="*{label}"
+                                                                                                       class="form-control"
+                                                                                                       id="label"
+                                                                                                       placeholder="Label"/>
+                                        <span
+                                                th:if="${#fields.hasErrors('label')}" th:errors="*{label}"
+                                                class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="photoFace" class="col-form-label">photoFace</label>
+                                        <img alt="Image" th:src="@{'/uploads/'+ ${produit.photoFace}}" width="50"
+                                             height="50"/>
+                                        <input name="photoFace" type="hidden" th:field="*{photoFace}"/>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                        <label for="photoFace" class="col-form-label">New photoFace</label>
+                                        <input class="form-control" type="file" name="files" multiple>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="photoProfil" class="col-form-label">photoProfil</label>
+                                        <img alt="Image" th:src="@{'/uploads/'+ ${produit.photoProfil}}" width="50"
+                                             height="50"/>
+                                        <input name="photoProfil" type="hidden" th:field="*{photoProfil}"/>
+                                    </div>
+
+
+                                    <div class="form-group col-md-12">
+                                        <label for="photoProfil" class="col-form-label">New photoProfil</label>
+                                        <input class="form-control" type="file" name="files" multiple>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="prix" class="col-form-label">prix</label> <input type="number"
+                                                                                                     th:field="*{prix}"
+                                                                                                     class="form-control"
+                                                                                                     id="prix"
+                                                                                                     placeholder="prix"/>
+                                        <span
+                                                th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}"
+                                                class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="description" class="col-form-label">description</label> <input
+                                            type="text"
+                                            th:field="*{description}"
+                                            class="form-control"
+                                            id="description"
+                                            placeholder="description"/>
+                                        <span
+                                                th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                                                class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="quantiteStock" class="col-form-label">quantiteStock</label> <input
+                                            type="number"
+                                            th:field="*{quantiteStock}"
+                                            class="form-control"
+                                            id="quantiteStock"
+                                            placeholder="quantiteStock"/>
+                                        <span
+                                                th:if="${#fields.hasErrors('quantiteStock')}"
+                                                th:errors="*{quantiteStock}"
+                                                class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="price" class="col-form-label">prixPromotion</label> <input
+                                            type="text"
+                                            th:field="*{prixPromotion}"
+                                            class="form-control"
+                                            id="prixPromotion"
+                                            placeholder="prixPromotion"/>
+                                        <span
+                                                th:if="${#fields.hasErrors('prixPromotion')}"
+                                                th:errors="*{prixPromotion}"
+                                                class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="price" class="col-form-label">dateExpiration</label> <input
+                                            type="date"
+                                            th:field="*{dateExpiration}"
+                                            class="form-control"
+                                            id="date"
+                                            placeholder="date"/>
+                                        <span
+                                                th:if="${#fields.hasErrors('dateExpiration')}"
+                                                th:errors="*{dateExpiration}"
+                                                class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-8">
+                                        <label for="provider" class="col-form-label">Select Provider</label>
+                                        <select name="providerId" class="form-control">
+                                            <option th:each="pr: ${providers}"
+                                                    th:value="${pr.id}"
+                                                    th:text="${pr.name}"
+                                                    th:selected="(${pr.id} == ${idProvider})"
+                                            />
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group col-md-8">
+                                        <input type="submit" class="btn btn-primary" value="Update Produit">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="fragments/footer :: footer"/>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<!--    <div th:replace="fragments/logoutmodal :: logoutmodal"/>-->
+
+<!-- Bootstrap core JavaScript-->
+<script th:src="@{/back/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/back/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!-- Core plugin JavaScript-->
+<script th:src="@{/back/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+<!-- Custom scripts for all pages-->
+<script th:src="@{/back/js/sb-admin-2.min.js}"></script>
+
+<!-- Page level plugins -->
+<script th:src="@{/back/vendor/chart.js/Chart.min.js}"></script>
+
+<!-- Page level custom scripts -->
+<script th:src="@{/back/js/demo/chart-area-demo.js}"></script>
+<script th:src="@{/back/js/demo/chart-pie-demo.js}"></script>
+
+</body>
+
+</html>
+
